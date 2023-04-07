@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 (async function main () {
   try {
@@ -11,4 +11,4 @@ const mongoose = require('mongoose');
   }
 })();
 
-module.exports = mongoose;
+export default mongoose;

@@ -1,0 +1,33 @@
+#dashboard-window {
+  width: 100%;
+  height: 100%;
+  background-color: #a26b6b;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#navbar-container {
+  width: 100%;
+  height: 10%;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px;
+  border: 1px solid white;
+  box-sizing: border-box;
+}
+
+#game-window-container {
+  width: 800px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid white;
+
+}

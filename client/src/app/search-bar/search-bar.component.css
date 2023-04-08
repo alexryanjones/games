@@ -1,0 +1,29 @@
+#form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+#search-bar {
+  width: 200px;
+  height: 30px;
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 5px;
+  background-color: white;
+  color: white;
+  padding: 0 5px;
+  font-size: 1rem;
+}
+
+#search-button {
+  height: 30px;
+  border: none;
+  background: none;
+}
+
+#search-icon {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+}

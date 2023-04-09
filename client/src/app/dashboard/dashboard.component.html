@@ -1,5 +1,14 @@
 <div id="game-window-container">
-  <img class="arrow-button" src="assets/arrow.svg" alt="Arrow Icon" />
-  <app-game-window></app-game-window>
-  <img class="arrow-button" src="assets/arrow.svg" alt="Arrow Icon" />
+  <img class="arrow-button" src="assets/arrow.svg" alt="Arrow Icon" (click)="decrementIndex()" />
+  
+  <ng-container *ngIf="(games$ | async) as games">
+    <ng-container *ngIf="games.length === 0">
+      <div id="no-games-found-message">Search for games</div>
+    </ng-container>
+    <ng-container *ngIf="games.length > 0">
+      <app-game-window [game]="games[currentIndex]"></app-game-window>
+    </ng-container>
+  </ng-container>
+
+  <img class="arrow-button" src="assets/arrow.svg" alt="Arrow Icon" (click)="incrementIndex()" />
 </div>

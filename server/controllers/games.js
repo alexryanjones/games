@@ -9,10 +9,17 @@ const apiKey = process.env.API_KEY;
 async function getGames(req, res) {
   try {
     const { title } = req.body;
-
     const cachedResult = await queries.findOne({ search: title.toLowerCase() });
     if (cachedResult) {
-      return res.send(cachedResult);
+      const strippedCacheResults = cachedResult.results.map(
+        ({ title, background_image, releaseDate }) => ({
+          title,
+          background_image,
+          releaseDate
+        })
+      );
+        
+      return res.send(strippedCacheResults);
     }
 
     const urlSearch = title.replace(' ', '%20');
@@ -29,9 +36,17 @@ async function getGames(req, res) {
       results: strippedGames,
     };
 
-    await queries.create(query);
+    const savedQuery = await queries.create(query);
 
-    res.send(strippedGames);
+    const strippedResults = savedQuery.results.map(
+      ({ title, background_image, releaseDate }) => ({
+        title,
+        background_image,
+        releaseDate: new Date(releaseDate).toISOString().slice(0, 10),
+      })
+    );
+
+    res.send(strippedResults);
   } catch (error) {
     console.log(error);
     res.status(500).send(error);

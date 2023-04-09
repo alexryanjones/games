@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',

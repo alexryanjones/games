@@ -1,0 +1,19 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Game } from './types';
+
+const API_URL = 'http://localhost:4000';
+const games = "/games";
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ApiService {
+  constructor(private http: HttpClient) {}
+
+  searchGames(query: string): Observable<Game[]> {
+    const body = { title: query };
+    return this.http.post<Game[]>(API_URL + games, body);
+  }
+}

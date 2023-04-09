@@ -4,7 +4,7 @@
   background-color: #423939;
   overflow: hidden;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
   border: 5px solid white;
   border-radius: 10px;

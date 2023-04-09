@@ -17,7 +17,9 @@ export class DashboardComponent implements OnInit {
     this.games$ = store.select(selectGames);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.games$);
+  }
 
   incrementIndex() {
     this.currentIndex++;

@@ -1,5 +1,13 @@
 #game-poster {
-  height: 400px;
   width: 300px;
   border: 1px solid white;
+  align-self: flex-start;
+}
+
+#poster {
+  max-height: 100%;
+  width: 100%;;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }

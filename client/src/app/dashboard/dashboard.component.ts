@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { Game, AppState } from '../types';
 import { selectGames } from '../store/games.selectors';
 
@@ -22,10 +23,16 @@ export class DashboardComponent implements OnInit {
   }
 
   incrementIndex() {
-    this.currentIndex++;
+    this.games$.pipe(take(1)).subscribe((games: Game[]) => {
+      if (this.currentIndex < games.length - 1) {
+        this.currentIndex++;
+      }
+    });
   }
 
   decrementIndex() {
-    this.currentIndex--;
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+    }
   }
 }

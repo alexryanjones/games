@@ -27,7 +27,6 @@ async function getGames(req, res) {
     let page = 1;
     const pageSize = 20;
     while (results.length < 100) {
-      // you can change this to any desired number of results
       const response = await fetch(
         `${baseUrl}games?token&key=${apiKey}&search=${urlSearch}&page=${page}&page_size=${pageSize}`
       );
@@ -42,7 +41,6 @@ async function getGames(req, res) {
       }));
       results = results.concat(strippedGames);
       page++;
-      console.log(results.length);
     }
 
     const query = {

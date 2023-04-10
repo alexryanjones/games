@@ -6,9 +6,18 @@
       <img id="pointer-arrow" src="assets/pointer-arrow.svg" alt="pointer">
     </ng-container>
     <ng-container *ngIf="games.length > 0">
-      <img class="arrow-button" src="assets/arrow.svg" alt="Arrow Icon" (click)="decrementIndex()" />
+      <img
+        class="arrow-button {{currentIndex === 0 ? 'disabled' : ''}}"
+        [src]="currentIndex === 0 ? 'assets/arrow-disabled.svg' : 'assets/arrow.svg'"
+        alt="Arrow Icon"
+        (click)="decrementIndex()" />
       <app-game-window [game]="games[currentIndex]"></app-game-window>
-      <img class="arrow-button" src="assets/arrow.svg" alt="Arrow Icon" (click)="incrementIndex()" />
+      <h3 id="result-number">Showing result {{currentIndex + 1}} / {{(games$ | async)?.length}}</h3>
+      <img 
+        class="arrow-button {{currentIndex === games.length - 1 ? 'disabled' : ''}}"
+        [src]="currentIndex === games.length - 1 ? 'assets/arrow-disabled.svg' : 'assets/arrow.svg'"
+        alt="Arrow Icon"
+        (click)="incrementIndex()" />
     </ng-container>
   </ng-container>
 

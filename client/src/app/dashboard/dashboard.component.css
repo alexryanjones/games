@@ -16,6 +16,10 @@
   transform: rotateY(180deg);
 }
 
+.arrow-button.disabled {
+  pointer-events: none;
+}
+
 #no-games-message {
   font-size: 5rem;
   font-weight: bold;
@@ -29,4 +33,13 @@
 #pointer-arrow {
   height: 200px;
   margin-bottom: 200px;
+}
+
+#result-number {
+  font-weight: bold;
+  color: white;
+  text-shadow: 0px 0px 5px black;
+  filter: drop-shadow(0 0 0.75rem rgb(42, 41, 41));
+  position: absolute;
+  bottom: 180px;
 }

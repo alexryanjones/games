@@ -15,25 +15,39 @@ async function getGames(req, res) {
         ({ title, background_image, releaseDate }) => ({
           title,
           background_image,
-          releaseDate
+          releaseDate,
         })
       );
-        
+
       return res.send(strippedCacheResults);
     }
 
     const urlSearch = title.replace(' ', '%20');
-    const response = await fetch(`${baseUrl}games?token&key=${apiKey}&search=${urlSearch}`);
-    const games = await response.json();
-    const strippedGames = games.results.map((game) => ({
-      title: game.name,
-      background_image: game.background_image,
-      releaseDate: game.released,
-    }));
+    let results = [];
+    let page = 1;
+    const pageSize = 20;
+    while (results.length < 100) {
+      // you can change this to any desired number of results
+      const response = await fetch(
+        `${baseUrl}games?token&key=${apiKey}&search=${urlSearch}&page=${page}&page_size=${pageSize}`
+      );
+      const games = await response.json();
+      if (games.count === 0 || games.results.length === 0) {
+        break;
+      }
+      const strippedGames = games.results.map((game) => ({
+        title: game.name,
+        background_image: game.background_image,
+        releaseDate: game.released,
+      }));
+      results = results.concat(strippedGames);
+      page++;
+      console.log(results.length);
+    }
 
     const query = {
       search: title.toLowerCase(),
-      results: strippedGames,
+      results: results,
     };
 
     const savedQuery = await queries.create(query);
@@ -52,5 +66,6 @@ async function getGames(req, res) {
     res.status(500).send(error);
   }
 }
+
 
 export default { getGames };

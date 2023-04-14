@@ -7,7 +7,7 @@ import { Game } from '../types';
   styleUrls: ['./game-details.component.css'],
 })
 export class GameDetailsComponent implements OnInit {
-  @Input() game: Game;
+  @Input() game!: Game;
 
   constructor() {
     this.game = {} as Game;

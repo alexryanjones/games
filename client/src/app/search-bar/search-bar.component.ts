@@ -18,7 +18,6 @@ export class SearchBarComponent implements OnInit {
     event.preventDefault();
     const query = event.target['search-bar'].value;
     this.apiService.searchGames(query).subscribe((games: Game[]) => {
-      console.log('from search', games);
       this.store.dispatch(UpdateGamesAction({ games }));
     });
   }

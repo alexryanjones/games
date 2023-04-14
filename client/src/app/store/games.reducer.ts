@@ -5,8 +5,6 @@ import { UpdateGamesAction } from './games.actions';
 export const gamesReducer: ActionReducer<Game[], Action> = createReducer(
   [] as Game[],
   on(UpdateGamesAction, (state, { games }) => {
-    const updatedState = games;
-    console.log('Updated state:', updatedState);
-    return updatedState;
+    return games;
   })
 );

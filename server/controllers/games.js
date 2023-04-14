@@ -8,21 +8,21 @@ const apiKey = process.env.API_KEY;
 
 async function getGames(req, res) {
   try {
-    const { title } = req.body;
+    const { title } = req.query;
     const cachedResult = await queries.findOne({ search: title.toLowerCase() });
     if (cachedResult) {
       const strippedCacheResults = cachedResult.results.map(
         ({ title, background_image, releaseDate }) => ({
           title,
           background_image,
-          releaseDate,
+          releaseDate
         })
       );
 
       return res.send(strippedCacheResults);
     }
 
-    const urlSearch = title.replace(' ', '%20');
+    const urlSearch = title.replaceAll(' ', '%20');
     let results = [];
     let page = 1;
     const pageSize = 20;
@@ -37,7 +37,7 @@ async function getGames(req, res) {
       const strippedGames = games.results.map((game) => ({
         title: game.name,
         background_image: game.background_image,
-        releaseDate: game.released,
+        releaseDate: new Date(game.released).toISOString().slice(0, 10),
       }));
       results = results.concat(strippedGames);
       page++;
@@ -48,17 +48,9 @@ async function getGames(req, res) {
       results: results,
     };
 
-    const savedQuery = await queries.create(query);
+    await queries.create(query);
 
-    const strippedResults = savedQuery.results.map(
-      ({ title, background_image, releaseDate }) => ({
-        title,
-        background_image,
-        releaseDate: new Date(releaseDate).toISOString().slice(0, 10),
-      })
-    );
-
-    res.send(strippedResults);
+    res.send(results);
   } catch (error) {
     console.log(error);
     res.status(500).send(error);

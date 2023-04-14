@@ -4,6 +4,6 @@ const router = express.Router();
 
 router.get('/check', (req, res) => {res.send('Hello World!')});
 
-router.post('/games', games.getGames);
+router.get('/games', games.getGames);
 
 export default router;

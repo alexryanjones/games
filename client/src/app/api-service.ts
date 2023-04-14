@@ -13,7 +13,7 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   searchGames(query: string): Observable<Game[]> {
-    const body = { title: query };
-    return this.http.post<Game[]>(API_URL + games, body);
+    const params = { title: query };
+    return this.http.get<Game[]>(API_URL + games, { params });
   }
 }

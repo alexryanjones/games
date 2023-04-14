@@ -7,7 +7,7 @@ import { Game } from '../types';
   styleUrls: ['./game-poster.component.css'],
 })
 export class GamePosterComponent implements OnInit {
-  @Input() game: Game;
+  @Input() game!: Game;
   
   constructor() {
     this.game = {} as Game;
